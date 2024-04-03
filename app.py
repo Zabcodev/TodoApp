@@ -227,9 +227,8 @@ def update_task_id(task_id):
         verify_new_id, mensaje = valid_id(new_id)
         if mensaje is not None:
             print(mensaje)
-    if verify_new_id:
-        map(task_to_update(task_id, 'id', new_id), task_list)
-        print('El codigo (ID) de la tarea ha sido actualizado exitosamente.')
+    map(task_to_update(task_id, 'id', new_id), task_list)
+    print('El codigo (ID) de la tarea ha sido actualizado exitosamente.')
 
 def update_task_title(task_id):
     print('---------- ACTUALIZAR TITULO TAREA ----------')
@@ -239,9 +238,8 @@ def update_task_title(task_id):
         verify_new_title, mensaje = valid_title(new_title)
         if mensaje is not None:
             print(mensaje)
-    if verify_new_title:
-        map(task_to_update(task_id, 'titulo', new_title), task_list)
-        print('El titulo de la tarea ha sido actualizado exitosamente')
+    map(task_to_update(task_id, 'titulo', new_title), task_list)
+    print('El titulo de la tarea ha sido actualizado exitosamente')
 
 def update_task_description(task_id):
     print('---------- ACTUALIZAR DESCRIPCION TAREA ----------')
@@ -251,9 +249,8 @@ def update_task_description(task_id):
         verify_new_description, mensaje = valid_description(new_description)
         if mensaje is not None:
             print(mensaje)
-    if verify_new_description:
-        map(task_to_update(task_id, 'descripcion', new_description), task_list)
-        print('La descripcion de la tarea ha sido actualizado exitosamente')
+    map(task_to_update(task_id, 'descripcion', new_description), task_list)
+    print('La descripcion de la tarea ha sido actualizado exitosamente')
 
 def update_task_status(task_id):
     verify_new_status = False
@@ -262,9 +259,8 @@ def update_task_status(task_id):
         verify_new_status, mensaje = valid_status(new_status)
         if mensaje is not None:
             print(mensaje)
-    if verify_new_status:
-        map(task_to_update(task_id, 'estado', new_status), task_list)
-        print('El estado de la tarea ha sido actualizado exitosamente')
+    map(task_to_update(task_id, 'estado', new_status), task_list)
+    print('El estado de la tarea ha sido actualizado exitosamente')
 
 def update_task_date(task_id):
     verify_new_date = False
@@ -273,10 +269,8 @@ def update_task_date(task_id):
         verify_new_date, mensaje = valid_date(new_date)
         if mensaje is not None:
             print(mensaje)
-
-    if verify_new_date:
-        map(task_to_update(task_id, 'fecha', new_date), task_list)
-        print('La fecha de la tarea ha sido actualizado exitosamente')
+    map(task_to_update(task_id, 'fecha', new_date), task_list)
+    print('La fecha de la tarea ha sido actualizado exitosamente')
 
 def menu_update_task(task_id):
     encontrado, mensaje = verify_task_exist(task_id)
