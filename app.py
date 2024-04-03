@@ -4,15 +4,16 @@ task_list = []
 status_task = ['Completado', 'Pendiente']
 
 
-'''------------------------------------------------- FUNCIONES DE LA SECCION 1 -> LISTA DE TAREAS -------------------------------------------------'''
+'''--------------------------------------- FUNCIONES DE LA SECCION 1 -> LISTA DE TAREAS ---------------------------------------'''
+
 def completed_task_list():
-    completed_list = [task for task in task_list if task['estado'] == status_task[0]]
+    completed_list = [task for task in task_list if task['estado'].lower() == status_task[0].lower()]
     print('---------- TAREAS COMPLETADAS ----------')
     print_list(completed_list)
     print('----------------------------------------')
 
 def pending_task_list():
-    pending_list = [task for task in task_list if task['estado'] == status_task[1]]
+    pending_list = [task for task in task_list if task['estado'].lower() == status_task[1].lower()]
     print('---------- TAREAS PENDIENTES ----------')
     print_list(pending_list)
     print('----------------------------------------')
@@ -38,10 +39,11 @@ def list_task_status():
             case '3': ejecucion_menu = False
             case _: print('Opcion invalida, intente de nuevo.')
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''----------------------------------------------------------------------------------------------------------------------------'''
 
 
-'''------------------------------------------------- FUNCIONES DE LA SECCION 2 -> FILTRAR TAREAS -------------------------------------------------'''
+'''--------------------------------------- FUNCIONES DE LA SECCION 2 -> FILTRAR TAREAS ---------------------------------------'''
+
 def filter_task_by_id():
     verify_id = False
     while not verify_id:
@@ -51,8 +53,8 @@ def filter_task_by_id():
     tasks_by_id = list(filter(lambda task: task if task['id'] == filter_id else False, task_list))
     if tasks_by_id is not None:
         print_list(tasks_by_id)
-    print('Tarea no econtrada.')
-
+    else:
+        print('Tarea no econtrada.')
 
 def filter_task_by_title():
     verify_title = False
@@ -63,8 +65,8 @@ def filter_task_by_title():
     tasks_by_title = list(filter(lambda task: task if filter_title.lower() in task['titulo'].lower() else False, task_list))
     if tasks_by_title is not None:
         print_list(tasks_by_title)
-    print('No se han encontrado tareas que coincidan con el titulo ingresado.')
-
+    else:
+        print('No se han encontrado tareas que coincidan con el titulo ingresado.')
 
 def filter_task_by_date():
     verify_date = False
@@ -77,8 +79,8 @@ def filter_task_by_date():
     tasks_by_date = list(filter(lambda task: task if task['fecha'] == filter_date else False, task_list))
     if tasks_by_date is not None:
         print_list(tasks_by_date)
-    print('No se han encontrado tareas que coincidan con la fecha ingresada.')
-
+    else:
+        print('No se han encontrado tareas que coincidan con la fecha ingresada.')
 
 def filter_tasks():
     ejecucion_menu = True
@@ -97,9 +99,10 @@ def filter_tasks():
             case '4': ejecucion_menu = False
             case _: print('Opcion invalida, intente de nuevo.')
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''----------------------------------------------------------------------------------------------------------------------------'''
 
-'''--------------------------------------------------- FUNCIONES DE LA SECCION 3 -> AÑADIR TAREA --------------------------------------------------'''
+'''---------------------------------------- FUNCIONES DE LA SECCION 3 -> AÑADIR TAREA -----------------------------------------'''
+
 def is_number(check_id):
     return ' '.join(check_id.split()).isdigit()
 
@@ -132,7 +135,7 @@ def valid_description(description):
 
 def valid_status(check_status):
     for status in status_task:
-        if status == check_status.capitalize():
+        if status.lower() == check_status.lower():
             return True, None
     return False, 'Estado ingresado no permitido.'
 
@@ -184,7 +187,7 @@ def add_task():
 
     verify_date = False
     while not verify_date:
-        date_creation = input('Fecha de creacion: ')
+        date_creation = input('Fecha de creacion (DD-MM-YYYY): ')
         verify_date, mensaje = valid_date(date_creation)
         if mensaje is not None:
             print(mensaje)
@@ -193,15 +196,16 @@ def add_task():
         'id': id,
         'titulo': title,
         'descripcion': description,
-        'estado': status.capitalize(),
+        'estado': status,
         'fecha': date_creation
     }
 
     task_list.append(task)
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''----------------------------------------------------------------------------------------------------------------------------'''
 
-'''------------------------------------------------- FUNCIONES DE LA SECCION 4 -> ACTUALIZAR TAREA ------------------------------------------------'''
+'''--------------------------------------- FUNCIONES DE LA SECCION 4 -> ACTUALIZAR TAREA --------------------------------------'''
+
 def task_to_update(task_id, task_key_update, new_value):
     for task in task_list:
         if task['id'] == task_id:
@@ -214,7 +218,6 @@ def verify_task_exist(task_id):
         if exist_task is not None:
             return True, 'Tarea encontrada.'
     return False, 'Tarea no encontrada'
-
 
 def update_task_id(task_id):
     print('---------- ACTUALIZAR CODIGO TAREA ----------')
@@ -252,7 +255,6 @@ def update_task_description(task_id):
         map(task_to_update(task_id, 'descripcion', new_description), task_list)
         print('La descripcion de la tarea ha sido actualizado exitosamente')
 
-
 def update_task_status(task_id):
     verify_new_status = False
     while not verify_new_status:
@@ -263,7 +265,6 @@ def update_task_status(task_id):
     if verify_new_status:
         map(task_to_update(task_id, 'estado', new_status), task_list)
         print('El estado de la tarea ha sido actualizado exitosamente')
-
 
 def update_task_date(task_id):
     verify_new_date = False
@@ -276,8 +277,6 @@ def update_task_date(task_id):
     if verify_new_date:
         map(task_to_update(task_id, 'fecha', new_date), task_list)
         print('La fecha de la tarea ha sido actualizado exitosamente')
-
-
 
 def menu_update_task(task_id):
     encontrado, mensaje = verify_task_exist(task_id)
@@ -306,7 +305,6 @@ def menu_update_task(task_id):
                 encontrado = False
             case _: print('Opcion invalida, intente de nuevo.')
 
-
 def update_task():
     print('-' * 10, 'ACTUALIZAR TAREA', '-' * 10)
     verify_id = False
@@ -316,9 +314,9 @@ def update_task():
     print('-' * 50)
     menu_update_task(task_id)
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''----------------------------------------------------------------------------------------------------------------------------'''
 
-'''-------------------------------------------------- FUNCIONES DE LA SECCION 5 -> ELIMINAR TAREA -------------------------------------------------'''
+'''--------------------------------------- FUNCIONES DE LA SECCION 5 -> ELIMINAR TAREA ----------------------------------------'''
 
 def delete_task():
     verify_id = False
@@ -338,16 +336,16 @@ def delete_task():
     else:
         print('Tarea no encontrada, intentelo de nuevo')
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''-----------------------------------------------------------------------------------------------------------------------------'''
 
-'''----------------------------------------------- FUNCION DE LA SECCION 6 -> SALIR DE LA APLICACION ----------------------------------------------'''
+'''------------------------------------- FUNCION DE LA SECCION 6 -> SALIR DE LA APLICACION -------------------------------------'''
 
 def close_app():
     exit(1)
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''----------------------------------------------------------------------------------------------------------------------------'''
 
-'''--------------------------------------------------- MENU PRINCIPAL DE LA APLICACION DE TAREAS --------------------------------------------------'''
+'''---------------------------------------- MENU PRINCIPAL DE LA APLICACION DE TAREAS -----------------------------------------'''
 def task_app():
     while True:
         print('''
@@ -368,7 +366,7 @@ def task_app():
             case '6': close_app()
             case _: print('Opcion invalida, intente de nuevo.')
 
-'''------------------------------------------------------------------------------------------------------------------------------------------------'''
+'''----------------------------------------------------------------------------------------------------------------------------'''
 
 # Inicio de la ejecucion del programa
 task_app()
