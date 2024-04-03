@@ -4,17 +4,17 @@ Esta es una aplicación de tareas desarrollada en Python que permite a los usuar
 
 ## Funcionalidades.
 
--** Lista de tareas: ** Contiene un sub-menu que cuenta con las opciones para mostrar la lista de tareas completadas, pendientes y con una opción de atrás que permite volver al menu principal de ejecución.
+- Lista de tareas: Contiene un sub-menu que cuenta con las opciones para mostrar la lista de tareas completadas, pendientes y con una opción de atrás que permite volver al menu principal de ejecución.
 
--** Filtrar tareas:  ** Permite al usuario filtrar las tareas por diferentes criterios como ID, título y fecha.
+- Filtrar tareas: Permite al usuario filtrar las tareas por diferentes criterios como ID, título y fecha.
 
--** Añadir tareas: ** Permite al usuario agregar nuevas tareas.
+- Añadir tareas: Permite al usuario agregar nuevas tareas.
 
--** Actualizar tareas: ** Tiene un sub-menu que permite al usuario actualizar los campos como, código (ID), título, descripción, status, fecha de creación de una tarea ya existente dentro de la lista.
+- Actualizar tareas: Tiene un sub-menu que permite al usuario actualizar los campos como, código (ID), título, descripción, status, fecha de creación de una tarea ya existente dentro de la lista.
 
--** Eliminar tareas: ** Permite al usuario eliminar una tarea de la lista.
+- Eliminar tareas: Permite al usuario eliminar una tarea de la lista.
 
--** Salir: ** Finaliza la ejecución de la aplicación.
+- Salir: Finaliza la ejecución de la aplicación.
 
 ## Validaciones.
 
