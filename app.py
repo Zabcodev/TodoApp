@@ -253,6 +253,7 @@ def update_task_description(task_id):
     print('La descripcion de la tarea ha sido actualizado exitosamente')
 
 def update_task_status(task_id):
+    print('---------- ACTUALIZAR STATUS TAREA ----------')
     verify_new_status = False
     while not verify_new_status:
         new_status = input('Introduce el nuevo status de la tarea: ')
@@ -263,6 +264,7 @@ def update_task_status(task_id):
     print('El estado de la tarea ha sido actualizado exitosamente')
 
 def update_task_date(task_id):
+    print('---------- ACTUALIZAR FECHA TAREA ----------')
     verify_new_date = False
     while not verify_new_date:
         new_date = input('Introduce la nueva fecha de la tarea: ')
