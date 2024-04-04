@@ -114,7 +114,7 @@ def id_is_unique(check_id):
     
 def valid_id(check_id):
     if not is_number(check_id):
-        return False, 'El ID debe ser un digito numerico.'
+        return False, 'El ID debe ser un digito numerico entero.'
     if not id_is_unique(check_id):
         return False, 'El ID ya esta en uso, ingrese otro diferente.'
     return True, None
@@ -144,7 +144,7 @@ def valid_date(date):
     pattern = r'^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$'
 
     if not re.match(pattern, date):
-        return False, 'Error. El formato de fecha ingresado es invalido.'
+        return False, 'El formato de fecha ingresado es invalido.'
     
     day, month, year = map(int, date.split('-'))
 
@@ -201,6 +201,7 @@ def add_task():
     }
 
     task_list.append(task)
+    print('Tarea añadida exitosamente.')
 
 '''----------------------------------------------------------------------------------------------------------------------------'''
 
