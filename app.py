@@ -213,12 +213,13 @@ def task_to_update(task_id, task_key_update, new_value):
             task[task_key_update] = new_value
             break
 
-def verify_task_exist(task_id):
+def verify_task_exist(id_task_to_update):
     if len(task_list) > 0:
-        exist_task = [task for task in task_list if task['id'] == task_id]
-        if exist_task is not None:
-            return True, 'Tarea encontrada.'
-    return False, 'Tarea no encontrada'
+        for task in task_list:
+            if task['id'] == id_task_to_update:
+                return True, 'Tarea encontrada'
+        return False, 'Tarea no encontrada, introduce nuevamente el id de la tarea.'
+    return False
 
 def update_task_id(task_id):
     print('---------- ACTUALIZAR CODIGO TAREA ----------')
@@ -275,14 +276,10 @@ def update_task_date(task_id):
     map(task_to_update(task_id, 'fecha', new_date), task_list)
     print('La fecha de la tarea ha sido actualizado exitosamente')
 
-def menu_update_task(task_id):
-    encontrado, mensaje = verify_task_exist(task_id)
-    if encontrado:
-        print(mensaje)
-    else:
-        print(mensaje)
+def menu_update_task(task_id, message):
+    print(message)
     ejecucion_menu = True
-    while ejecucion_menu and encontrado:
+    while ejecucion_menu:
         print('-' * 50)
         print('1.- Actualizar codigo.')
         print('2.- Actualizar titulo.')
@@ -299,18 +296,23 @@ def menu_update_task(task_id):
             case '5': update_task_date(task_id)
             case '6': 
                 ejecucion_menu = False
-                encontrado = False
             case _: print('Opcion invalida, intente de nuevo.')
 
 def update_task():
     print('-' * 10, 'ACTUALIZAR TAREA', '-' * 10)
     verify_id = False
-    while not verify_id:
-        task_id = input("Introduce el codigo (ID) de la tarea a actualizar: ")
-        verify_id = is_number(task_id)
+    verify_task = False
+    message_exist = ''
+    while not verify_id and not verify_task:
+        id_task_to_update = input("Introduce el codigo (ID) de la tarea a actualizar: ")
+        verify_id = is_number(id_task_to_update)
+        verify_task, message_exist = verify_task_exist(id_task_to_update)
+        if not verify_task:
+            verify_id = False
+            print(message_exist)
     print('-' * 50)
-    menu_update_task(task_id)
-
+    menu_update_task(id_task_to_update, message_exist)
+    print('-' * 50)
 '''----------------------------------------------------------------------------------------------------------------------------'''
 
 '''--------------------------------------- FUNCIONES DE LA SECCION 5 -> ELIMINAR TAREA ----------------------------------------'''
